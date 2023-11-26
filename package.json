@@ -10,6 +10,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "json-server -p3001 --watch db.json",
+    "test": "jest --verbose",
     "build:ui": "rm -rf build && cd ../frontend && npm run build && cp -r build ../backend",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   },
@@ -33,6 +34,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "jest": "^29.7.0",
     "json-server": "^0.17.3",
     "nodemon": "^3.0.1",
     "vite": "^4.4.5"
@@ -51,5 +53,10 @@
   "bugs": {
     "url": "https://github.com/alelikak/fullstackopenosa3/issues"
   },
-  "homepage": "https://github.com/alelikak/fullstackopenosa3#readme"
+  "homepage": "https://github.com/alelikak/fullstackopenosa3#readme",
+  "jest": {
+    "testEnvironment": "node"
+  }
+
 }
+
