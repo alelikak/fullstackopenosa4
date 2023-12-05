@@ -40,7 +40,7 @@ afterAll(async () => {
 // expect(response.body[0].url).toBe('http://www.Paopantoy.com')
 //})
 
-test('all blogs are returned', async () => {
+test('all blogs are returned', async () => {//Tehtava 4.8
   const response = await api.get('/api/blogs')
 
   expect(response.body).toHaveLength(helper.initialBlogs.length)})
@@ -53,7 +53,7 @@ test('a specific blog is within the returned blogs', async () => {
     'www.paopantou.gr'  )
 })
 
-test('if a blog is created without likes, then 0 is set to likes', async () => {
+test('if a blog is created without likes, then 0 is set to likes', async () => { // 4.11 Tehtava
 
   const newBlog = {
     author: 'Fullstack2',   title: 'oleole', url: 'www.fullstackopen.com'
@@ -75,7 +75,7 @@ test('if a blog is created without likes, then 0 is set to likes', async () => {
 })
 
 /////////////////
-test('a valid blog can be added ', async () => {
+test('a valid blog can be added ', async () => {// Tehtava 4.10
   const newBlog = {
     author: 'Fullstack',   title: 'async/await simplifies making async calls', url: 'www.fullstackopen.com',   likes: 5
   }
@@ -100,7 +100,7 @@ test('a valid blog can be added ', async () => {
   )
 })
 
-test('blog without title, author and url is not added', async () => {
+test('blog without title and url is not added', async () => { // Tehtava 4.12
   const newBlog = {
     likes: 1
   }
@@ -146,7 +146,7 @@ afterAll(async () => {
   await mongoose.connection.close()
 })
 
-test('id variable is not undefined', async () => {
+test('id variable is not undefined', async () => { //Tehtava 4.9 https://fullstackopen.com/osa4/backendin_testaaminen#tehtavat-4-8-4-12
   const response = await api.get('/api/blogs')
   const ids = response.body.map(r => r.id)
   console.log(ids)
