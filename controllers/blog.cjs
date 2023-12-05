@@ -114,7 +114,7 @@ blogRouter.delete('/:id', async (request, response) => {
 
 
 
-blogRouter.put('/:id', (request, response, next) => {
+blogRouter.put('/:id', async (request, response, next) => {
   const body = request.body
 
   const blog = new blog({
