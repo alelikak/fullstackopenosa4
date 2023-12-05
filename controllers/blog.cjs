@@ -13,13 +13,29 @@ app.get('/api/blogs', (request, response) => {
 
 */
 
-blogRouter.get('/', (request, response) => {
-  blog.find({}).then(blogs => {
-    response.json(blogs)
-  })
+blogRouter.get('/',async (request, response) => {
+  const blogs = await blog.find({})
+  //blog.find({}).then(blogs => {
+  response.json(blogs)
 })
+//})
 
 
+
+/*
+blogRouter.get('/:id', async (request, response, next) => {
+  try {
+    const blog = await blog.findById(request.params.id)
+    if (blog) {
+      response.json(blog)
+    } else {
+      response.status(404).end()
+    }
+  } catch(exception) {
+    next(exception)
+  }
+})
+*/
 
 
 blogRouter.get('/:id', (request, response, next) => {
@@ -45,14 +61,22 @@ app.post('/api/blogs', (request, response) => {
     })
 })*/
 
+
+
 blogRouter.post('/', (request, response,next) => {
   const body = request.body
 
+  if (body.title === undefined || body.url === undefined ) {
+    return response.status(400).json({ error: 'content missing' })
+  }
+
+
+
   const blog2 = new blog({
-    title: body.title,
     author: body.author,
+    title: body.title,
     url: body.url,
-    likes: body.likes
+    likes: body.likes === undefined ? 0:body.likes
   })
 
   blog2.save()
@@ -62,13 +86,33 @@ blogRouter.post('/', (request, response,next) => {
     .catch(error => next(error))
 })
 
-blogRouter.delete('/:id', (request, response, next) => {
-  blog.findByIdAndRemove(request.params.id)
-    .then(() => {
-      response.status(204).end()
-    })
-    .catch(error => next(error))
+
+
+//try {    const savedBlog = await blog.save()
+//response.status(201).json(savedNote)  }
+// catch(exception) {    next(exception)  }})
+
+
+blogRouter.delete('/:id', async (request, response) => {
+
+  //try {
+  await blog.findByIdAndDelete(request.params.id)
+  response.status(204).end()
+  //} catch (exception) {
+  //  next(exception)
+  //}
+
+
+
+  // blog.findByIdAndRemove(request.params.id)
+  //   .then(() => {
+  //     response.status(204).end()
+  //   })
+  //   .catch(error => next(error))
 })
+
+
+
 
 blogRouter.put('/:id', (request, response, next) => {
   const body = request.body
@@ -88,3 +132,6 @@ blogRouter.put('/:id', (request, response, next) => {
 })
 
 module.exports = blogRouter
+
+
+

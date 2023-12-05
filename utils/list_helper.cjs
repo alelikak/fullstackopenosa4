@@ -28,8 +28,23 @@ const favoriteBlog = (blogs) => {
 
 
 
+
+const mostBlogs = (blogs) => {
+
+
+  var a = require('lodash')//https://lodash.com/
+
+  var result = a.countBy(blogs, 'author')//https://stackoverflow.com/questions/38868820/groupby-count-in-lodash
+  //let result = a.countBy(blogs,"author").map(function(cnt) { return { count: cnt }})
+  console.log(result)
+
+  return  result //https://stackoverflow.com/questions/37542093/get-the-last-element-in-json-array
+}
+
+
 module.exports = {
   dummy,
   totalLikes,
-  favoriteBlog
+  favoriteBlog,
+  mostBlogs
 }
